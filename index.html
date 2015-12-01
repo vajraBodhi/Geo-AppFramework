@@ -6,9 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 		<title>ArcGIS Web Application</title>
 		<link rel="shortcut icon" href="images/shortcut.png">
-		<!--[if IE 8]>
-    <link rel="stylesheet" type="text/css"  href="jimu.js/css/jimu-ie.css" />
-    <![endif]-->
 		<style type="text/css">
 		*{box-sizing: border-box;}
       body,html {
@@ -19,57 +16,19 @@
         overflow:hidden;
       }
 		</style>
-    <link rel="stylesheet" type="text/css" href="configs/loading/loading.css" />
-		<script>
-			/*******************************
-			* This is the function you can modify to customize the loading page
-			* This function will be invoked when one resource is loaded.
-			********************************/
-			// var progress;
-			// function loadingCallback(url, i, count) {
-			// 	var loading = document.getElementById('main-loading-bar');
-			// 	loading.setAttribute('title', url);
-			//   if(!progress){
-			//     progress = document.createElement('div');
-			//     progress.setAttribute('class', 'loading-progress');
-			//     loading.appendChild(progress);
-			//   }
-			//   progress.style.width = (((i - 1)/count) * 100) + '%';
-			// }
-		</script>
 	</head>
 	<body class="claro jimu-main-font">
-
 		<div id="main-loading">
-
 			<!-- This is section you can modify to customize the loading page -->
 			<div id="app-loading"></div>
       <div id="loading-gif"></div>
-
-			<!-- //////////////////    END    ////////////////////////////// -->
-			<div id="ie-note" style="display:none;">
-        <div class="hint-title">Error</div>
-        <div class="hint-img">Your browser is currently not supported.</div>
-        <p class="hint-text">
-          <span>
-            Please note that creating presentations is not supported in Internet Explorer versions 6, 7.
-          </span>
-          <br>
-          <span>
-            We recommend upgrading to the latest Internet Explorer, Google Chrome, or Firefox.
-          </span>
-          <br>
-          <span>
-            If you are using IE 8 or later, make sure you turn off "Compatibility View".
-          </span>
-        </p>
-      </div>
 		</div>
 		<div id="main-page">
-			<div id="jimu-layout-manager"></div>
+			<div id="stem-layout-manager">
+        <div id="mapPlaceholder"></div>   
+      </div>
 		</div>
-
-		<script src="env.js"></script>
+    <script type="text/javascript" src="customLoader.js"></script>
 		<script type="text/javascript" src="init.js"></script>
 	</body>
 </html>

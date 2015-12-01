@@ -1,70 +1,4 @@
 (function(global){
-	global.loadResources = function(resources, cb) {
-		var len = resources.length;
-		var count = 0;
-		for (var i = 0; i < len; i++) {
-			var resource = resources[i];
-			addResource(resource);
-		}
-
-		function addResource(resource) {
-			var loadedResource = function() {
-				count++;
-				resource.complete();
-				if (count === len) {
-					cb();
-				}
-			};
-			if (resource.type === 'script') {
-				addScript(resource.url, loadedResource);
-			} else if (resource.type === 'styleSheet') {
-				addLink(resource.url, loadedResource)
-			}
-		};
-
-		function addScript(url, complete) {
-			var script = document.createElement('script');
-			script.type = 'text/javascript';
-			if ('readystatechange' in script) {
-				script.onreadystatechange = function() {
-					if (script.readystate === 'loaded' || script.readystate === 'complete') {
-						complete();
-					}
-				}
-			} else {
-				script.onload = function() {
-					complete();
-				}
-			}
-			script.src = url;
-			var head = document.getElementsByTagName('head')[0];
-			head.appendChild(script);
-		};
-
-		function addLink(url, complete) {
-			var link = document.createElement('link');
-			link.type = 'css/text';
-			link.rel = 'styleSheet';
-			if ('readystatechange' in link) {
-				link.onreadystatechange = function() {
-					if (link.readystate === 'loaded' || link.readystate === 'complete') {
-						complete();
-					}
-				}
-			} else {
-				link.onload = function() {
-					complete();
-				}
-			}
-
-			link.href = url;
-			var head = document.getElementsByTagName('head')[0];
-			head.appendChild(link);
-		}
-	}
-})(window);
-
-(function(global){
 	var mapApi = "";
 	var ap = Array.prototype;
 	var polyfills = [{
@@ -92,18 +26,54 @@
 
 	global.loadPolyfills = function(tests, cb) {
 		var resources = [];
+		if (tests.length === 0) {
+			cb();
+			return;
+		}
 		for (var i = 0, len = tests.length; i < len; i++) {
 			var polyfill = tests[i];
-			if (polyfill.test) {
+			if (!polyfill.test) {
 				resources.push({
 					type: 'script',
 					url: polyfill.nope,
-					loaded: polyfill.complete
+					complete: polyfill.complete
 				});
 			}
 		}
 
 		loadResources(resources, cb);
 	}
+	var resources = [{
+		url: './roots/require.js',
+		type: 'script',
+		complete: null
+	}];
+
+	loadPolyfills(polyfills, function() {
+		loadResources(resources, function() {
+			requirejs.config({
+        baseUrl: './roots',
+        packages: [{
+        	name: 'stem',
+        	location: '../stem'
+        }/*, {
+        	name: 'roots',
+        	location: './roots'
+        }*/],
+        map: {
+          '*': {
+            'jquery': 'jquery-private',
+          },
+          'jquery-private': {
+            'jquery': 'jquery'
+          }
+        }
+      });
+      require(['jquery'], function(ss) {
+        console.log($);
+        console.log(ss('#lzz'));
+      });
+		})
+	})
 })(window);
 
