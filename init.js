@@ -1,4 +1,5 @@
 (function(global){
+  global.PATH = location.pathname;
 	var mapApi = "";
 	var ap = Array.prototype;
 	var polyfills = [{

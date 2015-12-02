@@ -30,8 +30,8 @@
 
   //Optional. The logo/title/subtitle of app. Default value is default logo/"HTML5 app"/"A configurable web application".
   "logo": "",
-  "title": "ArcGIS Web Application",
-  "subtitle": "A configurable web application",
+  "title": "GeoApp Framework",
+  "subtitle": "A app framework address in GIS",
 
   //Optional. App can contain some links.
   "links":[
@@ -44,7 +44,7 @@
   "bodhiOnTouch": {
     //bodhis(not in group) are opened in this panel.
     "panel": {
-      "uri": "jimu/PanelType1"
+      "uri": "stem/PanelType1"
     },
 
     "bodhis": [{
@@ -109,8 +109,9 @@
   },
 
   "map": {
+    "domId": // the dom element to display the map.
     //The uri of map module, map module is a amd module return a map instance.
-    url:
+    uri:
 
     //The same as widget's fix position.
     "position": {
