@@ -1,0 +1,59 @@
+{
+  "season": {
+    "name": "ordinaryworld",
+    "styles": ["black", "purple"],
+    "version": "0.1"
+  },
+
+  "httpProxy": {
+    "url": null,
+    "useProxy": true,
+    "alwaysUseProxy": false
+  },
+
+  "logo": "images/logo.png",
+  "title": "GeoApp Framework",
+  "subtitle": "An app framework address in GIS.",
+  "links": [{
+    "url": "http://openlayers.org/",
+    "label": "openlayers"
+  }, {
+    "url": "https://geohey.com/dashboard",
+    "label": "geohey"
+  }],
+  "bodhiOnTouch": {
+    "panel": {
+      "uri": "stem/TouchableBodhiPanel"
+    },
+    "bodhis": [{
+      "uri": "bodhis/MyLocation/Bodhi",
+      "position": {
+        "left": 20,
+        "top": 150,
+        "zIndex": 0
+      },
+      "version": "0.1"
+    }, {
+      "uri": "bodhis/HomeButton/Bodhi",
+      "position": {
+        "left": 20,
+        "top": 110,
+        "zIndex": 0
+      },
+      "version": "0.1"
+    }]
+  },
+  "map": {
+    "domId": "map",
+    "uri": "stem/MapModule",
+    "position": {
+      "left": 0,
+      "right": 0,
+      "top": 0,
+      "bottom": 0,
+      "width": "100%",
+      "height": "100%"
+    }
+  },
+  "version": "0.1"
+}
