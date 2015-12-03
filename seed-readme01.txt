@@ -3,7 +3,7 @@
 {
   //Required
   "season": {
-    "name": "FoldableSeason",
+    "name": "ordinaryworld",
 
     //This property stores all of the season's styles. The app displays the first style by default.
     "styles": [],
@@ -24,7 +24,7 @@
     //Optional. Default to false. If true, all requests use proxy.
     "alwaysUseProxy": false,
 
-    //Optional. If not empty, the url will be set to esriConfig.defaults.io.proxyUrl property.
+    //Optional. If not empty, the url will be set to eConfig.defaults.io.proxyUrl property.
     "url": ""
   },
 
