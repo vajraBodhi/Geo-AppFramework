@@ -3,13 +3,13 @@ define(['jquery'], function($) {
 	var clazz = function(params) {
 		this.seedConfig = params.seedConfig;
 	};
-	clazz.prototype.loadMap = function() {
+	clazz.prototype.loadMap = function(mapDiv) {
 		var mapFileUrl = this.seedConfig.map.map.url;
 		// map is an object with getMap method to get an instance of Map Class
 		require([mapFileUrl], function(map) {
-			map.getMap().then(function(mapObj) {
+			map.getMap(mapDiv).then(function(mapObj) {
 				console.log('map loaded');
-				$.pub('mapLoaded', mapObj);
+				$(document).trigger('mapLoaded', mapObj);
 			});
 		});
 	};

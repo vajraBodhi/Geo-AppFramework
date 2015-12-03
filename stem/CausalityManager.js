@@ -1,10 +1,13 @@
-define(["./utils"], function(utils) {
+define(["jquery", "./utils"], function($, utils) {
   var instance = null;
   var clazz = function() {
 
   };
   clazz.prototype.loadCausality = function() {
-    return utils.loadCausality();
+      $(document).trigger('causalityLoaded', causality);
+    return utils.loadCausality().then(function(causality) {
+      return causality;
+    });
   }
 
   clazz.getInstance = function() {
