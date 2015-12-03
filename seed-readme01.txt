@@ -6,7 +6,7 @@
     "name": "ordinaryworld",
 
     //This property stores all of the season's styles. The app displays the first style by default.
-    "styles": [],
+    "style": ,
 
     //Optional. It is the season version.
     "version": "1.1"

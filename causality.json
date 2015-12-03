@@ -1,7 +1,7 @@
 {
   "season": {
     "name": "ordinaryworld",
-    "styles": ["black", "purple"],
+    "style": "black",
     "version": "0.1"
   },
 
