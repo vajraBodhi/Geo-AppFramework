@@ -11,5 +11,13 @@ define(["jquery", "exports"], function($, exports) {
     link.rel = "stylesheet";
     link.href = url;
     $('head').append(link);
-  }
+  };
+
+  // pub/sub
+  exports.publish = function() {
+    $(document).trigger.apply($, arguments);
+  };
+  exports.subscribe = function(eventName, cb) {
+    $(document).on(eventName, cb);
+  };
 });

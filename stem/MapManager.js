@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'stem/utils'], function($, utils) {
 	var instance = null;
 	var clazz = function(params) {
 		this.seedConfig = params.seedConfig;
@@ -9,7 +9,7 @@ define(['jquery'], function($) {
 		require([mapFileUrl], function(map) {
 			map.getMap(mapDiv).then(function(mapObj) {
 				console.log('map loaded');
-				$(document).trigger('mapLoaded', mapObj);
+				utils.publish('mapLoaded', mapObj);
 			});
 		});
 	};

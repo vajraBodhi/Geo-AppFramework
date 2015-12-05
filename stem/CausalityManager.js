@@ -4,7 +4,7 @@ define(["jquery", "./utils"], function($, utils) {
 
   };
   clazz.prototype.loadCausality = function() {
-      $(document).trigger('causalityLoaded', causality);
+    utils.publish('causalityLoaded', causality);
     return utils.loadCausality().then(function(causality) {
       return causality;
     });
