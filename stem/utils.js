@@ -1,6 +1,7 @@
-define(["jquery", "exports"], function($, exports) {
+define(["jquery"], function($) {
+  var exports = {};
   exports.loadCausality = function() {
-    return $.getJSON({
+    return $.getJSON(window.PATH + 'causality.json', {
       url: window.PATH + 'causality.json'
     });
   };
@@ -14,10 +15,16 @@ define(["jquery", "exports"], function($, exports) {
   };
 
   // pub/sub
-  exports.publish = function() {
-    $(document).trigger.apply($, arguments);
+  exports.publish = function(eventName, params) {
+    // $(document).trigger.apply($, arguments);
+    $(document).trigger(eventName, params);
   };
-  exports.subscribe = function(eventName, cb) {
-    $(document).on(eventName, cb);
+  exports.subscribe = function(eventName, cb, scope) {
+    $(document).on(eventName, function() {
+      var params = Array.prototype.slice.call(arguments, 1);
+      cb.apply(scope, params);
+    });
   };
+
+  return exports;
 });

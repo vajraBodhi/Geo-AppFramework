@@ -1,18 +1,18 @@
-define(["jquery", "stem/MapManager", "stem/WidgetManager"],
-  function($, MapManager, widgetManager) {
+define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
+  function($, MapManager, BodhiManager, utils) {
   var instance = null;
 
   var clazz = function() {
     this.mapManager = MapManager.getInstance();
-    this.widgetManager = WidgetManager.getInstance();
-    utils.subscribe('causalityLoaded', this.onCausalityLoaded.bind(this));
-    utils.subscribe('mapLoaded', this.onMapLoaded.bind(this));
+    this.widgetManager = BodhiManager.getInstance();
+    utils.subscribe('causalityLoaded', this.onCausalityLoaded, this);
+    // utils.subscribe('mapLoaded', this.onMapLoaded.bind(this));
   };
 
   clazz.prototype.onCausalityLoaded = function(causality) {
     this.rawCausality = causality;
     this._loadSeasonStyles(causality.season);
-    this.mapManager.loadMap(causality.map.domId);
+    this.mapManager.loadMap(causality.map.uri, causality.map.domId);
   };
 
   clazz.prototype.onMapLoaded = function() {
@@ -25,14 +25,14 @@ define(["jquery", "stem/MapManager", "stem/WidgetManager"],
   };
 
   clazz.prototype._loadSeasonCommonStyle = function(name) {
-    var url = window.PATH + "/seaons/" + name + "/style.css";
-    utils.addStylesheet(url);
+    var url = window.PATH + "/seaons/" + name + "/default.css";
+    utils.loadStylesheet(url);
     $('body').addClass(name);
   };
 
   clazz.prototype._loadSeasonSpecificStyle = function(name, styleName) {
     var url = window.PATH + "/seaons/" + name + "/styles/" + styleName + ".css";
-    utils.addStylesheet(url);
+    utils.loadStylesheet(url);
     $('body').addClass(name);
   };
 
@@ -58,4 +58,14 @@ define(["jquery", "stem/MapManager", "stem/WidgetManager"],
       });
     }
   };
+
+  clazz.getInstance = function() {
+    if (instance === null) {
+      instance = new clazz();
+    }
+
+    return instance;
+  };
+
+  return clazz;
 });

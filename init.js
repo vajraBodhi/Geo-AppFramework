@@ -48,7 +48,11 @@
 		url: './roots/require.js',
 		type: 'script',
 		complete: null
-	}];
+	}, {
+    url: './roots/openlayers/ol.css',
+    type: 'styleSheet',
+    complete: null
+  }];
 
 	loadPolyfills(polyfills, function() {
 		loadResources(resources, function() {
@@ -70,9 +74,8 @@
           }
         }
       });
-      require(['jquery'], function(ss) {
-        console.log($);
-        console.log(ss('#lzz'));
+      require(['stem/main'], function(stemMain) {
+        stemMain.init();
       });
 		})
 	})

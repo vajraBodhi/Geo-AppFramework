@@ -44,7 +44,7 @@
     }]
   },
   "map": {
-    "domId": "map",
+    "domId": "mapPlaceholder",
     "uri": "stem/MapModule",
     "position": {
       "left": 0,
