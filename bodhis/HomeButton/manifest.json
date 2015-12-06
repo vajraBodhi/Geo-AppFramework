@@ -1,0 +1,13 @@
+{
+  "name": "HomeButton",
+  "version": "0.1",
+  "author": "vajraBodhi",
+  "description": "",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {
+    "inPanel": false,
+    "hasUIFile": false,
+    "hasCausality": false
+  }
+}

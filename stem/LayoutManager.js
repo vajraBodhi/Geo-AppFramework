@@ -3,19 +3,26 @@ define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
   var instance = null;
 
   var clazz = function() {
-    this.mapManager = MapManager.getInstance();
-    this.widgetManager = BodhiManager.getInstance();
     utils.subscribe('causalityLoaded', this.onCausalityLoaded, this);
-    // utils.subscribe('mapLoaded', this.onMapLoaded.bind(this));
+    utils.subscribe('mapLoaded', this.onMapLoaded, this);
   };
 
   clazz.prototype.onCausalityLoaded = function(causality) {
-    this.rawCausality = causality;
+    this.appCausality = causality;
     this._loadSeasonStyles(causality.season);
-    this.mapManager.loadMap(causality.map.uri, causality.map.domId);
+
+    this.mapManager = MapManager.getInstance({
+      'appCausality': this.appCausality
+    });
+    this.mapManager.loadMap(causality.map);
   };
 
-  clazz.prototype.onMapLoaded = function() {
+  clazz.prototype.onMapLoaded = function(map) {
+    this.map = map;
+    this.widgetManager = BodhiManager.getInstance({
+      'map': this.map,
+      'appCausality': this.appCausality
+    });
     this.loadOnTouchBodhis();
   };
 
@@ -43,14 +50,14 @@ define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
       var defs = [];
       for (var i = 0, len = onTouchBodhis.length; i < len; i++) {
         var b = onTouchBodhis[i];
-        defs.push(this.widgetManager.loadWidget(b));
+        defs.push(this.widgetManager.loadBodhi(b));
       }
       var that = this;
-      $.when.apply($, defs).then(function(widgetResources) {
+      $.when.apply($, defs).then(function(widgets) {
         // var ds = [];
-        for (var j = 0, len = widgetResources.length; j < len; j++) {
-          /*ds.push(*/that.widgetManager.createWidget(widgetResources[j]);//);
-        }
+        // for (var j = 0, len = widgetResources.length; j < len; j++) {
+        //   ds.push(that.widgetManager.createWidget(widgetResources[j]);//);
+        // }
 
         utils.publish('onTouchBodhisLoaded');
 

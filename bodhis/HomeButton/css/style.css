@@ -1,0 +1,21 @@
+.stem-bodhi-homebutton {
+  background-color: #ccc;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+
+.stem-bodhi-homebutton .HomeButton .home {
+  background-color: rgba(0,0,0,0);
+}
+
+.stem-bodhi-homebutton.inHome {
+	background-color: #000;
+}
+
+.stem-bodhi-homebutton .HomeButton .home:hover {
+  background-color: rgba(0,0,0,0.4);
+}
+
+.stem-bodhi-homebutton.inHome .HomeButton .home {
+	background-color: #000;
+}

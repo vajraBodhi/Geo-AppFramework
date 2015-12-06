@@ -30,17 +30,17 @@
       "position": {
         "left": 20,
         "top": 150,
-        "zIndex": 0
-      },
-      "version": "0.1"
+        "zIndex": 0,
+        "relativeTo": "map"
+      }
     }, {
       "uri": "bodhis/HomeButton/Bodhi",
       "position": {
         "left": 20,
         "top": 110,
-        "zIndex": 0
-      },
-      "version": "0.1"
+        "zIndex": 0,
+        "relativeTo": "map"
+      }
     }]
   },
   "map": {
@@ -51,7 +51,7 @@
       "right": 0,
       "top": 0,
       "bottom": 0,
-      "width": "100%",
+      "width": "60%",
       "height": "100%"
     }
   },
