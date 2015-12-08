@@ -14,5 +14,54 @@
 ///////////////////////////////////////////////////////////////////////////
 
 define(['jquery'], function($) {
+  var original = function() {
+    this.options = {
+      bodhiId: "",
+      label: "",
+      icon: "",
+      position: null,
+      config: null,
+      appConfig: null,
+      map: null,
+      templateString: null,
+      nls: null
+    };
+    this.baseClass = null;
+  };
 
+  original.prototype._create = function() {
+    this.postMixInProperties();
+    this.postCreate();
+  };
+
+  original.prototype.postMixInProperties = function() {
+    // process self properties
+  };
+
+  original.prototype.startup = function() {
+    if (this.options.position.relativeTo === 'map') {
+      this.element.appendTo('#' + this.options.appConfig.map.domId);
+    } else {
+      this.element.appendTo('#' + stemConfig.layoutId);
+    }
+  };
+
+  original.prototype.postCreate = function() {
+    this.element.addClass(this.baseClass).append($(this.options.templateString));
+  };
+
+  original.prototype.setPosition = function(position, container) {
+    this._setOption('position', position);
+    if (container) {
+      this.element.appendTo(container);
+    }
+
+    this.element.css(position);
+  };
+
+  original.prototype._destroy = function() {
+    $.empty(this.element);
+  };
+
+  return original;
 });

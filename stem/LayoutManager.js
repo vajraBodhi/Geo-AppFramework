@@ -5,6 +5,7 @@ define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
   var clazz = function() {
     utils.subscribe('causalityLoaded', this.onCausalityLoaded, this);
     utils.subscribe('mapLoaded', this.onMapLoaded, this);
+    //beforedestroy
   };
 
   clazz.prototype.onCausalityLoaded = function(causality) {

@@ -1,5 +1,9 @@
 (function(global){
   global.PATH = location.pathname;
+  global.stemConfig = {
+    layoutId: "main-page"
+  };
+
 	var mapApi = "";
 	var ap = Array.prototype;
 	var polyfills = [{
