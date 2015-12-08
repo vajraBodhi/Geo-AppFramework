@@ -13,3 +13,12 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
 
+define(['jquery', 'stem/BaseBodhi'], function($, BaseBodhi) {
+  var baseBodhi = new BaseBodhi();
+  $.widget('bodhi.HomeButton', {
+
+  });
+  $.widget.extend($.bodhi.HomeButton.prototype, baseBodhi);
+
+  return $.bodhi.HomeButton;
+});

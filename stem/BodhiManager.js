@@ -33,7 +33,9 @@ define(["jquery", 'stem/utils'], function($, utils) {
         };
 
         try{
-          var bodhi = clazz.init(config.dom, setting);
+          // var bodhi = clazz.init(config.dom, setting);
+          var bodhi = new clazz(setting, '<div></div>');
+          bodhi.startup();
           that.widgetsRepo.push(bodhi);
           def.resolve(bodhi);
         }catch(err) {
