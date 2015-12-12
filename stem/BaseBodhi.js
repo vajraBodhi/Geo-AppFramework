@@ -13,9 +13,9 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
 
-define(['jquery'], function($) {
-  var original = function() {
-    this.options = {
+define(['jquery', 'jquery-ui'], function($) {
+  $.extend($.Widget.prototype, {
+    options: {
       bodhiId: "",
       label: "",
       icon: "",
@@ -24,44 +24,45 @@ define(['jquery'], function($) {
       appConfig: null,
       map: null,
       templateString: null,
-      nls: null
-    };
-    this.baseClass = null;
-  };
+      nls: null,
+      desabled: true
+    },
+    baseClass: null,
 
-  original.prototype._create = function() {
-    this.postMixInProperties();
-    this.postCreate();
-  };
+    _create: function() {
+      debugger;
+      this.element.addClass(this.baseClass);
+      this.postMixInProperties();
+      this.element.addClass(this.baseClass).append($(this.options.templateString));
+      this.postCreate();
 
-  original.prototype.postMixInProperties = function() {
-    // process self properties
-  };
+      if (this.options.position && this.options.position.relativeTo === 'map') {
+        this.element.appendTo($(this.options.map.getViewport()));
+      } else {
+        this.element.appendTo('#' + stemConfig.layoutId);
+      }
+    },
+    postMixInProperties: function() {
+      // process self properties
+    },
+    startup: function() {
 
-  original.prototype.startup = function() {
-    if (this.options.position.relativeTo === 'map') {
-      this.element.appendTo('#' + this.options.appConfig.map.domId);
-    } else {
-      this.element.appendTo('#' + stemConfig.layoutId);
+    },
+    postCreate: function() {
+
+    },
+    setPosition: function(position, container) {
+      this._setOption('position', position);
+      if (position.relativeTo === 'map') {
+        this.element.appendTo($(this.options.map.getViewport()));
+      } else {
+        this.element.appendTo('#' + stemConfig.layoutId);
+      }
+
+      this.element.css(position);
+    },
+    _destroy: function() {
+      $.empty(this.element);
     }
-  };
-
-  original.prototype.postCreate = function() {
-    this.element.addClass(this.baseClass).append($(this.options.templateString));
-  };
-
-  original.prototype.setPosition = function(position, container) {
-    this._setOption('position', position);
-    if (container) {
-      this.element.appendTo(container);
-    }
-
-    this.element.css(position);
-  };
-
-  original.prototype._destroy = function() {
-    $.empty(this.element);
-  };
-
-  return original;
+  });
 });

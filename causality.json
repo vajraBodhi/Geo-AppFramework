@@ -26,14 +26,6 @@
       "uri": "stem/TouchableBodhiPanel"
     },
     "bodhis": [{
-      "uri": "bodhis/MyLocation/Bodhi",
-      "position": {
-        "left": 20,
-        "top": 150,
-        "zIndex": 0,
-        "relativeTo": "map"
-      }
-    }, {
       "uri": "bodhis/HomeButton/Bodhi",
       "position": {
         "left": 20,

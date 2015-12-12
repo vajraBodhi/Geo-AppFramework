@@ -8,6 +8,6 @@
   "properties": {
     "inPanel": false,
     "hasUIFile": false,
-    "hasCausality": false
+    "hasCausality": true
   }
 }

@@ -45,8 +45,8 @@ define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
   };
 
   clazz.prototype.loadOnTouchBodhis = function() {
-    var onTouchBodhis = this.rawCausality &&
-      this.rawCausality.bodhiOnTouch && this.rawCausality.bodhiOnTouch.bodhis;
+    var onTouchBodhis = this.appCausality &&
+      this.appCausality.bodhiOnTouch && this.appCausality.bodhiOnTouch.bodhis;
     if (onTouchBodhis && onTouchBodhis.length > 0) {
       var defs = [];
       for (var i = 0, len = onTouchBodhis.length; i < len; i++) {
@@ -55,14 +55,7 @@ define(["jquery", "stem/MapManager", "stem/BodhiManager", "stem/utils"],
       }
       var that = this;
       $.when.apply($, defs).then(function(widgets) {
-        // var ds = [];
-        // for (var j = 0, len = widgetResources.length; j < len; j++) {
-        //   ds.push(that.widgetManager.createWidget(widgetResources[j]);//);
-        // }
-
         utils.publish('onTouchBodhisLoaded');
-
-        // return $.Deferred(ds);// .promise?
       });
     }
   };

@@ -29,15 +29,16 @@ define(["jquery", 'stem/utils'], function($, utils) {
           causality: resources.causality,
           templateString: resources.templateString,
           map: that.map,
-          appCausality: that.appCausality
+          appCausality: that.appCausality,
+          position: config.position
         };
 
         try{
-          // var bodhi = clazz.init(config.dom, setting);
-          var bodhi = new clazz(setting, '<div></div>');
-          bodhi.startup();
-          that.widgetsRepo.push(bodhi);
-          def.resolve(bodhi);
+          var $bodhi = new clazz(setting, '<div></div>');
+          $bodhi.startup();
+          $bodhi.setPosition(config.position);
+          that.widgetsRepo.push($bodhi);
+          def.resolve($bodhi);
         }catch(err) {
           console.error(err);
           def.resolve(null);
@@ -63,16 +64,19 @@ define(["jquery", 'stem/utils'], function($, utils) {
   clazz.prototype.loadBodhiManifest = function(bodhiFolder) {
     var def = $.Deferred();
 
-    return $.getJSON(bodhiFolder + '/manifest.json');
+    return $.getJSON(bodhiFolder + '/manifest.json').then(function(manifest) {
+      return manifest;
+    });
   };
 
   clazz.prototype.loadResources = function(bodhiFolder, manifest) {
     var defs = [];
     var that = this;
+    var mp = manifest && manifest.properties;
 
-    defs.push(this.loadBodhiTemplate(bodhiFolder, manifest.hasUIFile));
-    defs.push(this.loadBodhiNls(bodhiFolder, manifest.hasUIFile));
-    defs.push(this.loadBodhiCausality(bodhiFolder, manifest.hasCausality));
+    defs.push(this.loadBodhiTemplate(bodhiFolder, mp && mp.hasUIFile));
+    defs.push(this.loadBodhiNls(bodhiFolder, mp && mp.hasUIFile));
+    defs.push(this.loadBodhiCausality(bodhiFolder, mp && mp.hasCausality));
     defs.push(this.loadBodhiStyle(bodhiFolder));
 
     return $.when.apply($, defs).then(function() {
@@ -134,7 +138,7 @@ define(["jquery", 'stem/utils'], function($, utils) {
   };
 
   clazz.getInstance = function(params) {
-    if (instance !== null) {
+    if (instance === null) {
       instance = new clazz(params);
     }
 

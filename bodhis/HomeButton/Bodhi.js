@@ -13,12 +13,30 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////
 
-define(['jquery', 'stem/BaseBodhi'], function($, BaseBodhi) {
-  var baseBodhi = new BaseBodhi();
+define(['jquery', 'openlayers/ol', 'stem/BaseBodhi', 'jquery-ui'],
+  function($, ol) {
   $.widget('bodhi.HomeButton', {
-
+    baseClass: 'stem-bodhis-HomeButton',
+    postCreate: function() {
+      debugger;
+      var config = this.options.causality;
+      var map = this.options.map;
+      var extent = config && config.extent;
+      var zt = null;
+      map.getControls().forEach(function(c) {
+        if (c instanceof ol.control.ZoomToExtent) {
+          zt = c;
+        }
+      });
+      map.removeControl(zt);
+      zt = new ol.control.ZoomToExtent({
+        extent: extent
+      });
+      map.addControl(zt);
+      this.element = $(zt.element);
+    }
   });
-  $.widget.extend($.bodhi.HomeButton.prototype, baseBodhi);
+
 
   return $.bodhi.HomeButton;
 });
