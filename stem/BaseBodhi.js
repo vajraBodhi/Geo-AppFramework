@@ -19,9 +19,10 @@ define(['jquery', 'jquery-ui'], function($) {
       bodhiId: "",
       label: "",
       icon: "",
+      folderUrl: "",
       position: null,
       config: null,
-      appConfig: null,
+      appCausality: null,
       map: null,
       templateString: null,
       nls: null,
@@ -30,7 +31,6 @@ define(['jquery', 'jquery-ui'], function($) {
     baseClass: null,
 
     _create: function() {
-      debugger;
       this.element.addClass(this.baseClass);
       this.postMixInProperties();
       this.element.addClass(this.baseClass).append($(this.options.templateString));

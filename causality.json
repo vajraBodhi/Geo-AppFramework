@@ -33,6 +33,14 @@
         "zIndex": 0,
         "relativeTo": "map"
       }
+    }, {
+      "uri": "bodhis/MyLocation/Bodhi",
+      "position": {
+        "left": 50,
+        "top": 110,
+        "zIndex": 0,
+        "relativeTo": "map"
+      }
     }]
   },
   "map": {
@@ -43,7 +51,7 @@
       "right": 0,
       "top": 0,
       "bottom": 0,
-      "width": "60%",
+      "width": "100%",
       "height": "100%"
     }
   },

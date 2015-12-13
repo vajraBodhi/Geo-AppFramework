@@ -1,0 +1,6 @@
+{
+  "useTracking": false,
+  "maximumAge": 10000,
+  "enableHighAccuracy": true,
+  "timeout": 600000
+}

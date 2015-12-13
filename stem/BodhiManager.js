@@ -30,7 +30,8 @@ define(["jquery", 'stem/utils'], function($, utils) {
           templateString: resources.templateString,
           map: that.map,
           appCausality: that.appCausality,
-          position: config.position
+          position: config.position,
+          folderUrl: bodhiFolder
         };
 
         try{
@@ -91,7 +92,7 @@ define(["jquery", 'stem/utils'], function($, utils) {
   clazz.prototype.loadBodhiTemplate = function(bodhiFolder, hasUIFile) {
     var def = $.Deferred();
     if (hasUIFile) {
-      require(['text!' + bodhiFolder + 'templates/template.html'], function(template) {
+      require(['text!' + bodhiFolder + '/templates/template.html'], function(template) {
         def.resolve(template);
       });
     } else {
@@ -101,15 +102,11 @@ define(["jquery", 'stem/utils'], function($, utils) {
     return def;
   };
 
-  clazz.prototype.loadBodhiNls = function(bodhiFolder, hasUIFile) {
+  clazz.prototype.loadBodhiNls = function(bodhiFolder) {
     var def = $.Deferred();
-    if (hasUIFile) {
-      require(['is8n!' + bodhiFolder + 'nls/strings'], function(nls) {
-        def.resolve(nls);
-      });
-    } else {
-      def.resolve(null);
-    }
+    require(['i18n!' + bodhiFolder + '/nls/strings.js'], function(nls) {
+      def.resolve(nls);
+    });
 
     return def;
   };

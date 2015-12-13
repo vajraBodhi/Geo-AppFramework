@@ -47,8 +47,8 @@
 
 		function addLink(url, complete) {
 			var link = document.createElement('link');
-			link.type = 'css/text';
-			link.rel = 'styleSheet';
+			link.type = 'text/css';
+			link.rel = 'stylesheet';
 			if ('readystatechange' in link) {
 				link.onreadystatechange = function() {
 					if (link.readystate === 'loaded' || link.readystate === 'complete') {

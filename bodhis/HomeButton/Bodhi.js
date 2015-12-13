@@ -18,7 +18,6 @@ define(['jquery', 'openlayers/ol', 'stem/BaseBodhi', 'jquery-ui'],
   $.widget('bodhi.HomeButton', {
     baseClass: 'stem-bodhis-HomeButton',
     postCreate: function() {
-      debugger;
       var config = this.options.causality;
       var map = this.options.map;
       var extent = config && config.extent;

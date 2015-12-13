@@ -56,6 +56,10 @@
     url: './roots/openlayers/ol.css',
     type: 'styleSheet',
     complete: null
+  }, {
+    url: './roots/../stem/css/style.css',
+    type: 'styleSheet',
+    complete: null
   }];
 
 	loadPolyfills(polyfills, function() {

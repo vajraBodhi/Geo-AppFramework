@@ -8,12 +8,6 @@ define(['openlayers/ol', 'jquery'], function(ol, $) {
         layers: [
           new ol.layer.Tile({
             source: osmSource
-          }),
-          new ol.layer.Tile({
-            source: new ol.source.TileDebug({
-              projection: 'EPSG:3857',
-              tileGrid: osmSource.getTileGrid()
-            })
           })
         ],
         target: mapDiv,
@@ -23,9 +17,8 @@ define(['openlayers/ol', 'jquery'], function(ol, $) {
           })
         }),
         view: new ol.View({
-          center: ol.proj.transform(
-              [-0.1275, 51.507222], 'EPSG:4326', 'EPSG:3857'),
-          zoom: 10
+          center: [0, 0],
+          zoom: 2
         })
       });
       def.resolve(map);
